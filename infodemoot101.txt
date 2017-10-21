@@ -1,0 +1,6 @@
+mykad(rx,4),nama(rx,5),alamat(rx,6),poskod(rx,8),kod_negeri(rx,9),kod_bandar(rx,7),telefon(rx,10),telefonbimbit(rx,10),tarikhlahir(rx,11),umurhari,umurbulan,umurtahun,kod_jantina(rx,13),kod_warganegara(rx,32),kod_pekerjaan(rx,33),kot_etnik(rx,16),pekerjaanlain
+
+
+
+
+rx,
