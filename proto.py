@@ -50,8 +50,19 @@ def givenamefromdb(rx,cx):
 		connection.close()
 
 def getdemofromxl(rx,cx):
+	varr = []
+	varr.append(giveICwithnoh(rx,4))
+	varr.append(sh.cell_value(rx,5))
+	varr.append(sh.cell_value(rx,6))
+	varr.append(sh.cell_value(rx,8))
 	
-		
+	
+	
+
+
+
+#mykad(rx,4),nama(rx,5),alamat(rx,6),poskod(rx,8),kod_negeri(rx,9),kod_bandar(rx,7),telefon(rx,10),telefonbimbit(rx,10),tarikhlahir(rx,11),umurhari,umurbulan,umurtahun,kod_jantina(rx,13),kod_warganegara(rx,32),kod_pekerjaan(rx,33),kot_etnik(rx,16),pekerjaanlain
+	
 #def masukdemobaru(rx,cx):
 	#if givenamefromdb(45,4)!=None:
 	#	sql = "INSERT INTO 'demoot101' VALUES ('
@@ -62,8 +73,7 @@ def getdemofromxl(rx,cx):
 #print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
 #print("Cell D30 is {0}".format(sh.cell_value(rowx=18, colx=4)))
 
-#if testdash('11-222-44'):
-#	print('hooray')
+
 
 
 #print(giveICno(18,4))
