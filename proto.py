@@ -2,8 +2,8 @@ import xlrd
 import pymysql.cursors
 
 #setting up the excel file connections
-book = xlrd.open_workbook("OUT PT - PEADS THERAPY.xls")
-sh = book.sheet_by_index(8)
+book = xlrd.open_workbook("sample.xls")
+sh = book.sheet_by_index(0)
 #####################################################
 
 
@@ -49,12 +49,73 @@ def givenamefromdb(rx,cx):
 	finally:
 		connection.close()
 
+def getkodnegeri(rx,cx):
+	str1 = "johor"
+	str2 = "kedah"
+	str3 = "kelantan"
+	str4 = "melaka"
+	str5 = "sembilan"
+	str6 = "pahang"
+	str7 = "pinang"
+	str8 = "perak"
+	str9 = "perlis"
+	str10 = "selangor"
+	str11 = "terengganu"
+	str12 = "sabah"
+	str13 = "sarawak"
+	str14 = "lumpur"
+	str15 = "labuan"
+	str16 = "putrajaya"
+	str17 = "luar negara"
+	ck = sh.cell_value(rx,cx).lower()
+	if ck.find(str1) != -1:
+		return "01"
+	elif ck.find(str2) != -1:
+		return "02"
+	elif ck.find(str3) != -1:
+		return "03"
+	elif ck.find(str4) != -1:
+		return "04"
+	elif ck.find(str5) != -1:
+		return "05"
+	elif ck.find(str6) != -1:
+		return "06"	
+	elif ck.find(str6) != -1:
+		return "06"
+	elif ck.find(str7) != -1:
+		return "07"
+	elif ck.find(str8) != -1:
+		return "08"
+	elif ck.find(str9) != -1:
+		return "09"
+	elif ck.find(str10) != -1:
+		return "10"
+	elif ck.find(str11) != -1:
+		return "11"
+	elif ck.find(str12) != -1:
+		return "12"
+	elif ck.find(str13) != -1:
+		return "13"
+	elif ck.find(str14) != -1:
+		return "14"
+	elif ck.find(str15) != -1:
+		return "15"
+	elif ck.find(str16) != -1:
+		return "16"
+	elif ck.find(str17) != -1:
+		return "98"
+	else:
+		return "tiada"
+		
+print(getkodnegeri(60,9))
+		
 def getdemofromxl(rx,cx):
 	varr = []
 	varr.append(giveICwithnoh(rx,4))
-	varr.append(sh.cell_value(rx,5))
-	varr.append(sh.cell_value(rx,6))
-	varr.append(sh.cell_value(rx,8))
+	varr.append(sh.cell_value(rx,5))#nama
+	varr.append(sh.cell_value(rx,6))#alamat
+	varr.append(sh.cell_value(rx,8))#poskod
+	
 	
 	
 	
