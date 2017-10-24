@@ -1,0 +1,1 @@
+{'Melayu': '01', 'Cina': '02', 'India': '03', 'Orang Asli Semenanjung': '04', 'Bajau': '05', 'Dusun': '06', 'Kadazan': '07', 'Murut': '08', 'Bumiputera Sabah Lain': '10', 'Melanau': '11', 'Kedayan': '12', 'Iban': '13', 'Bidayuh': '14', 'Bumiputra Sarawak Lain': '15', 'Lain-lain': '16', 'Bukan Warganegara': '17'}

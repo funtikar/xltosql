@@ -1,9 +1,11 @@
 import xlrd
 import pymysql.cursors
+import sys
+import datetime
 
 #setting up the excel file connections
-book = xlrd.open_workbook("sample.xls")
-sh = book.sheet_by_index(0)
+book = xlrd.open_workbook("M:\\Unit Perubatan Carakerja\\BUKU DAFTAR HARIAN SEMUA DISIPLIN 2017\\OUT PT - PEADS THERAPY.xls")
+sh = book.sheet_by_index(6)
 #####################################################
 
 
@@ -130,23 +132,51 @@ def getdemofromxl(rx,cx):
 	varr.append(getkodbandar(rx,7))#kodbandar
 	varr.append(sh.cell_value(rx,10))#telefon
 	varr.append(sh.cell_value(rx,10))#tbimbit
-	varr.append(sh.cell_value(rx,11))#tlahir
+	vartar = sh.cell_value(rx,11)
+	if type(vartar) == str:
+		varr.append(sh.cell_value(rx,11))#tlahir
+	elif type(vartar) == float:
+		vartar = datetime.datetime(*xlrd.xldate_as_tuple(vartar, book.datemode)) 
+		vartar = str(vartar)
+		vartar = vartar.split("-")
+		#print(vartar[2][])
+		newstuff = vartar[2][0:2] + "/" +vartar[1] + "/" + vartar[0]#
+		varr.append(newstuff)
 	vtlahir = sh.cell_value(rx,11)
-	xv = vtlahir.split("/")
-	varr.append(xv[0])#tarikh
-	divo = {1:'Januari',2:'Februari',3:'Mac',4:'April',5:'Mei',6:'Jun',7:'Julai',8:'Ogos',9:'September',10:'Oktober',11:'November',12:'Disember'}
-	varr.append(divo[int(xv[1])])#bulan
-	varr.append(xv[2])
-	if sh.cell_value(rx,13) == "Lelaki ":
+	if type(vtlahir) == str:
+		xv = vtlahir.split("/")
+		varr.append(xv[0])#tarikh
+		divo = {1:'Januari',2:'Februari',3:'Mac',4:'April',5:'Mei',6:'Jun',7:'Julai',8:'Ogos',9:'September',10:'Oktober',11:'November',12:'Disember'}
+		print(xv[0])
+		varr.append(divo[int(xv[1])])#bulan
+		varr.append(xv[2])
+	elif type(vtlahir) == float:
+		vtlahir = datetime.datetime(*xlrd.xldate_as_tuple(vtlahir, book.datemode)) 
+		vtlahir = str(vtlahir)
+		vtlahira = vtlahir.split("-")
+		#print(vtlahira[2][])
+		varr.append(vtlahira[2][0:2])#tarikh
+		varr.append(vtlahira[1])#bulan
+		varr.append(vtlahira[0])#tahun
+	#print(vtlahira)
+
+	if sh.cell_value(rx,13) == "Lelaki ":#jantinakod
 		varr.append("L")
 	elif sh.cell_value(rx,13) == "Perempuan ":
 		varr.append("P")
-	varr.append("14")
+	varr.append("14")#kodpekerjaan
+	kodetnikdata = {'Melayu': '01', 'Cina ': '02', 'India': '03', 'Orang Asli Semenanjung': '04', 'Bajau': '05', 'Dusun': '06', 'Kadazan': '07', 'Murut': '08', 'Bumiputra Sabah Lain': '10', 'Melanau': '11', 'Kedayan': '12', 'Iban ': '13', 'Bidayuh': '14', 'Bumiputra Sarawak Lain': '15', 'Lain-lain': '16', 'Bukan Warganegara': '17'}
+	vkodetnik = sh.cell_value(rx,16)
+	print(vkodetnik)
+	varr.append(kodetnikdata[vkodetnik])
 	print(varr)
 	
-	
-getdemofromxl(59,7)
 
+for i in range(11,98):
+	getdemofromxl(i,4)
+	
+#getdemofromxl(int(sys.argv[1]),int(sys.argv[2]))
+#print(sh.cell_value(int(sys.argv[1]),int(sys.argv[2])))
 
 #mykad(rx,4),nama(rx,5),alamat(rx,6),poskod(rx,8),kod_negeri(rx,9),kod_bandar(rx,7),telefon(rx,10),telefonbimbit(rx,10),tarikhlahir(rx,11),umurhari,umurbulan,umurtahun,kod_jantina(rx,13),kod_warganegara(rx,32),kod_pekerjaan(rx,33),kot_etnik(rx,16),pekerjaanlain
 	
